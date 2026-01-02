@@ -1,13 +1,15 @@
 /*
 Firebase Push: App kapalıyken bile çalışır OS’e “kullanıcıya haber ver” der Kullanıcı bildirime tıklar → app açılır
 Ama şunu yapmaz: App açıkken UI’yi otomatik güncellemez Anlık veri akışı sağlamaz Örnek: “Yeni sipariş var” bildirimi geldi
-Ama liste yenilenmez, sen manuel fetch yaparsın. WebSocket ise  Buradaki “bildirim” şu anlama geliyor: Server’da bir
-olay oldu → uygulama bunu anında öğrendi Yani: OS notification değil Push değil Bu tamamen canlı veri haberi.
-Server’da yeni sipariş olur Server → hemen app’e mesaj yollar Stream’e yeni event düşer State değişir
-UI kendiliğinden güncellenir❗ Refresh yok❗ Restart yok❗ Tekrar fetch yok WebSocket: Bu verileri tek tek gönderir
-Stream: Flutter’da bu akışı düzgün şekilde dinlememizi sağlar WebSocket bir iletişim protokolü / bağlantı türü:
-“server ile sürekli açık bir hat kur, iki taraf da istediği an mesaj yollasın” demek. StreamBuilder nedir?
-StreamBuilder bir Widget’tır. Stream’i dinler ve her yeni event geldiğinde UI’yi otomatik rebuild eder.
+Ama liste yenilenmez, sen manuel fetch yaparsın.
+
+WebSocket ise  Buradaki “bildirim” şu anlama geliyor: Server’da bir olay oldu → uygulama bunu anında öğrendi Yani: OS notification 
+değil Push değil Bu tamamen canlı veri haberi. Server’da yeni sipariş olur Server → hemen app’e mesaj yollar Stream’e yeni event düşer
+State değişir UI kendiliğinden güncellenir❗ Refresh yok❗ Restart yok❗ Tekrar fetch yok WebSocket: Bu verileri tek tek gönderir
+Stream: Flutter’da bu akışı düzgün şekilde dinlememizi sağlar WebSocket bir iletişim protokolü / bağlantı türü: “server ile sürekli 
+açık bir hat kur, iki taraf da istediği an mesaj yollasın” demek.
+
+StreamBuilder nedir? StreamBuilder bir Widget’tır. Stream’i dinler ve her yeni event geldiğinde UI’yi otomatik rebuild eder.
 Yani:Stream = veri hattı StreamBuilder = bu hattı UI’ye bağlayan widget StreamBuilder, “ben bu stream’e göre ekranda bir
 şey çizmek istiyorum” dediğinde pratik olur Firebase’in arkasında server var, doğru. Ama o server: Senin “custom WebSocket
 endpoint”in gibi davranmaz endpointe bağlanıp, istediğin protokolü konuştuğun bir yer değildir bu nedenle fırebase ıle
@@ -174,7 +176,9 @@ class RtdbStreamListenOnChildAdded extends StatelessWidget {
           // Diğer durumlar için
           return Text(value.toString());
         }
-
+        
+        //value Map ise onu alıp yeni bir Map oluşturuyor tipini de Map<Object?, Object?> olarak sabitliyor
+        //cunku bazen mapler map<dynamic, dynamic> ya da baska turde donebılır bu da hataları azaltmak ıcın sabıtlemıs yenı map olusturmus
         final map = Map<Object?, Object?>.from(value);
 
         final items = map.entries.toList();
