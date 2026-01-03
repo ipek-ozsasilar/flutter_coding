@@ -21,10 +21,10 @@ Gerçek sistemde recv şu olurdu:
 
 Yani recv aslında server’ın sana push ettiği veriler.
  */
-// WebSocket bağlantısı için gerekli paketler
-import 'dart:async'; // Timer ve StreamSubscription için
-import 'package:flutter/material.dart'; // Flutter widget'ları için
-import 'package:web_socket_channel/web_socket_channel.dart'; // WebSocket bağlantısı için
+
+import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 // StatefulWidget: Durumu olan bir widget (bağlantı durumu, mesajlar, loglar gibi)
 // Bu widget WebSocket bağlantısını yönetir ve UI'yi gösterir
