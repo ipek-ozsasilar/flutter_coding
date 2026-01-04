@@ -28,6 +28,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 
 // StatefulWidget: Durumu olan bir widget (bağlantı durumu, mesajlar, loglar gibi)
 // Bu widget WebSocket bağlantısını yönetir ve UI'yi gösterir
+// WebSocket bağlantısını yöneten bir widget
 class ManagedWsClientPage extends StatefulWidget {
   const ManagedWsClientPage({super.key});
 
